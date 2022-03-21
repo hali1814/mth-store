@@ -18,5 +18,6 @@
     <color name="line_form">#EBF0FF</color>
     <color name="hint">#9098B1</color>
     <color name="line">#F0F0F0</color>
+    <color name="icon_second">#B3B3C3</color>
     <color name="back_ground_notification">#FFF5F3</color>
 </resources>

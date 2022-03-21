@@ -1,21 +1,26 @@
-package com.example.mthshop.activity;
+package com.example.mthshop.activities;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mthshop.R;
+import com.example.mthshop.dialog.ToastValidDate;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edUSerName, edPassWord;
@@ -26,12 +31,20 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkStatusPassword = true; // xu ly an hien pass word
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         initWidgets();
+        //status bar
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+
+
+
 
 
         //hien hoac an pass word
@@ -87,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
 
             }
         });
@@ -94,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
 
             }
         });
@@ -106,13 +121,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (user.isEmpty() || pass.isEmpty()) {
                     if (user.isEmpty()) {
                         edUSerName.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
+                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập email.", LoginActivity.this);
                     }
                     else {
                         edPassWord.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
+                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập mật khẩu.", LoginActivity.this);
                     }
 
                 }else {
-                    // to do
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
 
             }
