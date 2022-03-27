@@ -2,4 +2,6 @@
     <string name="app_name">MTH Shop</string>
     <string name="login_sign_up">Bạn không có tài khoản? <font color="#ED4D2D">Đăng ký</font></string>
     <string name="signUp_sign_in">Bạn đã có tài khoản? <font color="#ED4D2D">Đăng nhập</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

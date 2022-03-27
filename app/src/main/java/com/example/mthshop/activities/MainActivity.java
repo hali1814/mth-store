@@ -4,19 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.example.mthshop.R;
-import com.example.mthshop.fragment.CategoryFragment;
+import com.example.mthshop.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -33,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         initWidgets();
 
         //set fragment category
-        getSupportFragmentManager().beginTransaction().add(R.id.aMain_frameLayout ,new CategoryFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.aMain_frameLayout ,new HomeFragment()).commit();
 
         //bottom navigation
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

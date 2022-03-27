@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MTHShop">
         <activity
+            android:name=".activities.MyProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DetailsMeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ForgotPassword"
             android:exported="false" />
         <activity
@@ -29,7 +38,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

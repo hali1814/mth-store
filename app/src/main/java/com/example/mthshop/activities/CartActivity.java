@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.mthshop.R;
+
 public class CartActivity extends AppCompatActivity {
 
     @Override

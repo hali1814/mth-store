@@ -1,2 +1,4 @@
-package com.example.mthshop.model;public class Product {
+package com.example.mthshop.model;
+
+public class Product {
 }
