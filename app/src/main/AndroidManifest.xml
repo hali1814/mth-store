@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mthshop">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MTHShop">
+        <activity
+            android:name=".activities.DetailsProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HeadPhoneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.WatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LaptopActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.MyProductActivity"
             android:exported="false" />
@@ -26,6 +40,9 @@
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PhoneActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SayHiActivity"

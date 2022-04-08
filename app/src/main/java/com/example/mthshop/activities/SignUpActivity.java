@@ -7,15 +7,13 @@ import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mthshop.R;
-import com.example.mthshop.dialog.ToastValidDate;
+import com.example.mthshop.dialog.NotificationDiaLog;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText edName, edEmail, edPass, edConfirmPass;
@@ -52,23 +50,23 @@ public class SignUpActivity extends AppCompatActivity {
                 if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || passConfirm.isEmpty()) {
                     if (name.isEmpty()) {
                         edName.setBackground(ContextCompat.getDrawable(SignUpActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập họ và tên.", SignUpActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập họ và tên.", SignUpActivity.this);
                     }else if(email.isEmpty()){
                         edEmail.setBackground(ContextCompat.getDrawable(SignUpActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập email.", SignUpActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập email.", SignUpActivity.this);
                     }else if(pass.isEmpty()) {
                         edPass.setBackground(ContextCompat.getDrawable(SignUpActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập mật khẩu.", SignUpActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập mật khẩu.", SignUpActivity.this);
                     }else {
                         edConfirmPass.setBackground(ContextCompat.getDrawable(SignUpActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập xác nhận mật khẩu.", SignUpActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập xác nhận mật khẩu.", SignUpActivity.this);
                     }
                 }else {
                     if (pass.equals(passConfirm)) {
                         //to do
                     }else {
                         edConfirmPass.setBackground(ContextCompat.getDrawable(SignUpActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Mật khẩu và xác nhận mật khẩu không giống nhau.", SignUpActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Mật khẩu và xác nhận mật khẩu không giống nhau.", SignUpActivity.this);
                     }
                 }
             }

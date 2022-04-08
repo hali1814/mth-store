@@ -1,26 +1,31 @@
 package com.example.mthshop.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mthshop.R;
-import com.example.mthshop.dialog.ToastValidDate;
+import com.example.mthshop.api.APIService;
+import com.example.mthshop.dialog.NotificationDiaLog;
+import com.example.mthshop.model.User;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edUSerName, edPassWord;
@@ -29,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvForgotPass, tvSignUp;
     private ImageButton imgStatusEye;
     private boolean checkStatusPassword = true; // xu ly an hien pass word
+    public static User userCurrent;
 
 
 
@@ -39,12 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         initWidgets();
         //status bar
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
-
-
-
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.white));
 
 
         //hien hoac an pass word
@@ -116,20 +118,21 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = edUSerName.getText().toString();
-                String pass = edPassWord.getText().toString();
+                String user = edUSerName.getText().toString().trim();
+                String pass = edPassWord.getText().toString().trim();
                 if (user.isEmpty() || pass.isEmpty()) {
                     if (user.isEmpty()) {
                         edUSerName.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập email.", LoginActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập email.", LoginActivity.this);
                     }
                     else {
                         edPassWord.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
-                        ToastValidDate.showDiaLogValidDate("Ui!! Bạn chưa nhập mật khẩu.", LoginActivity.this);
+                        NotificationDiaLog.showDiaLogValidDate("Ui!! Bạn chưa nhập mật khẩu.", LoginActivity.this);
                     }
 
                 }else {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    NotificationDiaLog.showProgressBar(LoginActivity.this);
+                    checkLoginOnApi(user, pass);
                 }
 
             }
@@ -146,6 +149,39 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp = findViewById(R.id.aLogin_tvSingUp);
         imgStatusEye = findViewById(R.id.aLogin_imgStatusEye);
     }
+
+
+    private void checkLoginOnApi(String user, String pass) {
+        APIService.appService.callAllUsers(user).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                NotificationDiaLog.dismissProgressBar();
+                User tmp = response.body();
+                if (tmp != null) {
+                    if (tmp.getPassword().equals(pass)) {
+                        userCurrent = tmp;
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }else {
+                        edPassWord.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
+                        NotificationDiaLog.showDiaLogValidDate( "Sai mật khẩu !!", LoginActivity.this);
+                    }
+                }else {
+                    edUSerName.setBackground(ContextCompat.getDrawable(LoginActivity.this, R.drawable.form_style_login_false));
+                    NotificationDiaLog.showDiaLogValidDate( "Tài khoản không tồn tại !!", LoginActivity.this);
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                NotificationDiaLog.dismissProgressBar();
+                NotificationDiaLog.showDiaLogValidDate( "Lấy dữ liệu thất bại !!", LoginActivity.this);
+            }
+        });
+    }
+
+
+
+
+
 
 
 
