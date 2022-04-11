@@ -20,13 +20,25 @@
             android:id="@+id/aMyProduct_imgBtnBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="8dp"
 
             android:background="@drawable/btn_circle_white"
             android:src="@drawable/ic_back_24"
             android:tint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+
+            android:id="@+id/aMyProduct_imgBtnAdd"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/btn_circle_white"
+            android:src="@drawable/ic_add_24"
+            android:tint="@color/main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,10 +55,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/aMyProduct_tabLayout"
+    <View
+        android:id="@+id/view14"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
+
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aMyProduct_toolbar" />
@@ -55,10 +69,27 @@
         android:id="@+id/aMyProduct_recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/back_ground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aMyProduct_tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/view14" />
+
+    <TextView
+        android:id="@+id/aMyProduct_tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/arial_bold"
+        android:gravity="center"
+
+        android:text="Không có sản phẩm nào !"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view14"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

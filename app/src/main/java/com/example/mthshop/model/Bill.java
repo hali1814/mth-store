@@ -15,16 +15,16 @@ public class Bill {
     private double total;
     private String date;
     @SerializedName("Status")
-    private double status;
+    private int status;
     @SerializedName("Owner")
     private String owner;
 
-    public Bill(int idBill, double total, String date, double status, String owner) {
+    public Bill(int idBill, double total, String date, int status, String owner) {
         this.idBill = idBill;
         this.total = total;
         this.status = status;
         this.owner = owner;
-        formatDate(date);
+        this.date = date;
     }
 
     public Bill() {
@@ -48,6 +48,7 @@ public class Bill {
     }
 
     public String getDate() {
+        formatDate(date);
         return date;
     }
 
@@ -59,7 +60,7 @@ public class Bill {
         return status;
     }
 
-    public void setStatus(double status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

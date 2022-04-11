@@ -42,16 +42,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product productCurrent = listProduct.get(position);
         if (productCurrent.getSale() == 0) {
-            holder.tvPrice.setText(FortMartData.fortMartTypeDoubleToMoney(productCurrent.getPrice()) + " VND");
+            holder.tvPrice.setText("\u20AB" + FortMartData.fortMartTypeDoubleToMoney(productCurrent.getPrice()));
             holder.tvPriceSale.setVisibility(View.GONE);
         }else {
             double sale = (double) productCurrent.getSale()/100;
             double priceSale = (double) productCurrent.getPrice() * (1 - sale);
-            holder.tvPrice.setText(Html.fromHtml("<del>"+FortMartData.fortMartTypeDoubleToMoney(productCurrent.getPrice())+" VND </del>"));
+            holder.tvPrice.setText(Html.fromHtml("<del>" + "\u20AB" + FortMartData.fortMartTypeDoubleToMoney(productCurrent.getPrice())  + "</del>"));
             holder.tvPrice.setTextColor(activity.getResources().getColor(R.color.status_false));
             holder.tvPrice.setTextSize(10);
             holder.tvPriceSale.setVisibility(View.VISIBLE);
-            holder.tvPriceSale.setText(FortMartData.fortMartTypeDoubleToMoney(priceSale) + " VND");
+            holder.tvPriceSale.setText("\u20AB" + FortMartData.fortMartTypeDoubleToMoney(priceSale));
         }
         holder.tvNameProduct.setText(productCurrent.getNameProduct());
         Glide.with(activity).load(productCurrent.getImages()).placeholder(R.drawable.ic_bell_second).into(holder.imgProduct);

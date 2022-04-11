@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
+            android:layout_weight="7"
             android:background="@drawable/form_style_login"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
@@ -44,16 +44,39 @@
             android:textColorHint="@color/hint"
             android:textCursorDrawable="@drawable/cursor_style"
             android:textSize="14sp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/fDetailsProduct_btnCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_circle_background"
-            android:src="@drawable/ic_cart"
-            app:layout_constraintBottom_toBottomOf="@+id/fHome_tvTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fHome_tvTitle" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/fDetailsProduct_btnCart"
+                android:layout_width="60dp"
+                android:layout_height="78dp"
+                android:background="@drawable/btn_circle_white"
+                android:src="@drawable/ic_cart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fDetailsProduct_tvInfoCart"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_ground_info"
+                android:gravity="center"
+                android:text="1"
+                app:layout_constraintVertical_bias=".3"
+                app:layout_constraintHorizontal_bias=".8"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/fDetailsProduct_btnCart"
+                app:layout_constraintEnd_toEndOf="@+id/fDetailsProduct_btnCart"
+                app:layout_constraintStart_toStartOf="@+id/fDetailsProduct_btnCart"
+                app:layout_constraintTop_toTopOf="@+id/fDetailsProduct_btnCart" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
@@ -160,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/main"
-
+                android:id="@+id/fDetailsProduct_btnBuyNow"
                 android:text="Mua ngay"
                 android:textColor="@color/white"
                 android:textSize="14sp"

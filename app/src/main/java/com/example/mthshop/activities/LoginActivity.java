@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void checkLoginOnApi(String user, String pass) {
-        APIService.appService.callAllUsers(user).enqueue(new Callback<User>() {
+        APIService.appService.callUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 NotificationDiaLog.dismissProgressBar();

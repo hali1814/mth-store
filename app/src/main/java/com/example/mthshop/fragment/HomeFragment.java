@@ -22,14 +22,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mthshop.R;
+import com.example.mthshop.activities.CartActivity;
 import com.example.mthshop.activities.HeadPhoneActivity;
 import com.example.mthshop.activities.LaptopActivity;
+import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.activities.PhoneActivity;
 import com.example.mthshop.activities.WatchActivity;
 import com.example.mthshop.adapter.ProductAdapter;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.databinding.FragmentHomeBinding;
 import com.example.mthshop.dialog.NotificationDiaLog;
+import com.example.mthshop.model.Bill;
+import com.example.mthshop.model.BillDetails;
 import com.example.mthshop.model.Product;
 
 import java.util.ArrayList;
@@ -49,6 +53,8 @@ public class HomeFragment extends Fragment {
     private ProductAdapter productAdapter;
     private List<Product> listALlProducts;
     private List<Product> listSaleProducts;
+    private Bill billInCart;
+    private List<Product> listProduct;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +73,12 @@ public class HomeFragment extends Fragment {
         //animation banner
         animation = AnimationUtils.loadAnimation(getContext(), R.anim.benner_out);
         setListCategory();
-        //set recyclerview san pham giam gia
-
+        thisFragment.fHomeBtnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CartActivity.class));
+            }
+        });
         NotificationDiaLog.showProgressBar(getContext());
 
 
@@ -76,6 +86,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setSaleProduct() {
+        removeSoldOutProduct(listSaleProducts);
         productAdapter = new ProductAdapter(getActivity(), listSaleProducts);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         thisFragment.fHomeRecycleViewSaleProduct.setHasFixedSize(true);
@@ -84,6 +95,7 @@ public class HomeFragment extends Fragment {
         thisFragment.fHomeRecycleViewSaleProduct.setAdapter(productAdapter);
     }
     private void setSuggestProduct() {
+        removeSoldOutProduct(listALlProducts);
         ProductAdapter suggestAdapter = new ProductAdapter(getActivity(), listALlProducts);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         thisFragment.fHomeRecycleViewSuggest.setLayoutManager(gridLayoutManager);
@@ -92,9 +104,17 @@ public class HomeFragment extends Fragment {
         thisFragment.fHomeRecycleViewSuggest.setNestedScrollingEnabled(false);
     }
 
+    private void removeSoldOutProduct(List<Product> listProduct) {
+        for (int i = 0; i < listProduct.size(); i++) {
+            if (listProduct.get(i).getState().equals("Hết hàng")) {
+                listProduct.remove(i);
+            }
+        }
+    }
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
         getAllProduct();
     }
 
@@ -102,7 +122,6 @@ public class HomeFragment extends Fragment {
         APIService.appService.callAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                NotificationDiaLog.dismissProgressBar();
                 listALlProducts = response.body();
                 if (listALlProducts == null){
                     NotificationDiaLog.showDiaLogValidDate("Tải dữ liệu thất bại", getContext());
@@ -110,6 +129,7 @@ public class HomeFragment extends Fragment {
                 getListSale();
                 setSaleProduct();
                 setSuggestProduct();
+                callBillInCart();
             }
 
             @Override
@@ -145,6 +165,53 @@ public class HomeFragment extends Fragment {
         }
     };
 
+    private void callBillInCart() {
+        APIService.appService.callBillInCart(0, LoginActivity.userCurrent.getUser())
+                .enqueue(new Callback<List<Bill>>() {
+                    @Override
+                    public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
+                        try {
+                            billInCart = response.body().get(0);
+                            Log.e("hoho", billInCart.getIdBill() + "");
+                            callProductInCart();
+
+                        } catch (Exception e) {
+                            billInCart = null;
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<List<Bill>> call, Throwable t) {
+                        NotificationDiaLog.dismissProgressBar();
+                        setInfoCart(0);
+                        Log.e(thisFragment.toString(), t.toString());
+
+                    }
+                });
+    }
+
+    private void callProductInCart() {
+        APIService.appService.callProductInCart(billInCart.getIdBill()).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                listProduct = response.body();
+                if (listProduct != null)
+                    setInfoCart(listProduct.size());
+
+                NotificationDiaLog.dismissProgressBar();
+            }
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                NotificationDiaLog.dismissProgressBar();
+                setInfoCart(0);
+                Log.e(thisFragment.toString(), t.toString());
+            }
+        });
+    }
+
+
+
+
+
     //listener category
     private void setListCategory() {
         thisFragment.fHomeBtnPhone.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +242,15 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LaptopActivity.class));
             }
         });
+    }
+
+    private void setInfoCart(int i) {
+        if (i <= 0) {
+            thisFragment.fHomeTvInfoCart.setVisibility(View.GONE);
+        }else {
+            thisFragment.fHomeTvInfoCart.setVisibility(View.VISIBLE);
+            thisFragment.fHomeTvInfoCart.setText(i + "");
+        }
     }
 
 }

@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mthshop">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MTHShop">
+        android:theme="@style/Theme.MTHShop"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.AddMyProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.EditMyProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MyBillsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChangeInfoAccount"
+            android:exported="false" />
+        <activity
+            android:name=".activities.BuyDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.DetailsProductActivity"
             android:exported="false" />

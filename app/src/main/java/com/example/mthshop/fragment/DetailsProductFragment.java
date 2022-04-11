@@ -74,7 +74,7 @@ public class DetailsProductFragment extends Fragment {
 
 
     private void getOwnerProduct() {
-        APIService.appService.callAllUsers(productCurrent.getOwner()).enqueue(new Callback<User>() {
+        APIService.appService.callUser(productCurrent.getOwner()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 ownerProduct = response.body();

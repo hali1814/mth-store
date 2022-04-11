@@ -126,6 +126,8 @@ public class User {
                 ", address='" + address + '\'' +
                 ", role='" + role + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", sex='" + sex + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 

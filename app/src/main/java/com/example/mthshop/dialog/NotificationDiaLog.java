@@ -109,6 +109,7 @@ public class NotificationDiaLog {
         tvOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialogLogOut.dismiss();
                 ((Activity) context).finish();
             }
         });

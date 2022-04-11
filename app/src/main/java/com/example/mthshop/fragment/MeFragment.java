@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.example.mthshop.R;
 import com.example.mthshop.activities.DetailsMeActivity;
 import com.example.mthshop.activities.LoginActivity;
+import com.example.mthshop.activities.MyBillsActivity;
+import com.example.mthshop.activities.MyProductActivity;
 import com.example.mthshop.databinding.FragmentMeBinding;
 import com.example.mthshop.dialog.NotificationDiaLog;
 
@@ -31,6 +33,8 @@ public class MeFragment extends Fragment {
         decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); //set status text  light
         // push
         pushDataToLayout();
+        //
+        listenerToMyBill();
         //logout
         thisFragment.fMeEdLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +50,12 @@ public class MeFragment extends Fragment {
             }
         });
 
+        thisFragment.fMeEdMyProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MyProductActivity.class));
+            }
+        });
 
 
 
@@ -58,6 +68,37 @@ public class MeFragment extends Fragment {
         //name
         thisFragment.fMeTvUser.setText(LoginActivity.userCurrent.getUser());
 
+    }
+
+    private void listenerToMyBill() {
+        thisFragment.fMeLnWaitConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyBillsActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        thisFragment.fMeLnGetProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        thisFragment.fMeLnShipping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        thisFragment.fMeLnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 

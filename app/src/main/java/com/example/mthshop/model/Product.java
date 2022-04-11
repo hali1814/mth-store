@@ -32,6 +32,8 @@ public class Product implements Serializable {
     @SerializedName("Images")
     private String images;
 
+    public int inBill;
+
     public Product(int idProduct, String nameProduct, String whereProduction, String state, String warranty, String batteryCapacity, String description, String nameColor, String owner, int idType, int sale, double price, String images) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;

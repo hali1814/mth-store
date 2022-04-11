@@ -1,18 +1,31 @@
 package com.example.mthshop.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BillDetails {
     private int idBillDetails;
     private int idBill;
     private int idProduct;
+    @SerializedName("Status")
+    private int status;
 
 
-    public BillDetails(int idBillDetails, int idBill, int idProduct) {
+    public BillDetails(int idBillDetails, int idBill, int idProduct, int status) {
         this.idBillDetails = idBillDetails;
         this.idBill = idBill;
         this.idProduct = idProduct;
+        this.status = status;
     }
 
     public BillDetails() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getIdBillDetails() {
