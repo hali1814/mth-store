@@ -34,7 +34,8 @@ public class BuyDetailsActivity extends AppCompatActivity {
     private double priceSale;
     private double priceTotal;
     private double priceTotalBill;
-    private Bill billCurrent;
+    private Bill billCurrent; // bill mau ngay
+    private Bill billInCart; // bill trong cart
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,9 @@ public class BuyDetailsActivity extends AppCompatActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         //     //
-        productCurrent = (Product) getIntent().getSerializableExtra("product");
+
         status = getIntent().getIntExtra("buyNow", 3);
+        callBillInCart();
         //tinh toan bill
         setBill();
         //call fragment
@@ -69,14 +71,103 @@ public class BuyDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 NotificationDiaLog.dismissProgressBar();
                 if (status == 0) {// oder trong gio hang
-
+                    NotificationDiaLog.showProgressBar(BuyDetailsActivity.this);
+                    buyInCart();
                 }else {// mua ngay
-
+                    NotificationDiaLog.showProgressBar(BuyDetailsActivity.this);
                     createBillBuyNow();
 
                 }
             }
         });
+    }
+
+    private void buyInCart() { //bill status 1 -> 3
+        billInCart.setStatus(3);
+        billInCart.setTotal(priceTotalBill);
+        APIService.appService.putBill(billInCart).enqueue(new Callback<Bill>() {
+            @Override
+            public void onResponse(Call<Bill> call, Response<Bill> response) {
+                callBillDetails();
+                Log.e("billInCart", "true");
+            }
+
+            @Override
+            public void onFailure(Call<Bill> call, Throwable t) {
+                NotificationDiaLog.dismissProgressBar();
+                Log.e("billInCart", "false");
+            }
+        });
+    }
+
+    private void callBillDetails() { //status 0 -> 2 trang thai cho xac nhan
+        for (Product p: listProduct) {
+            APIService.appService.findBillDetails(billInCart.getIdBill(), p.getIdProduct()).enqueue(new Callback<BillDetails>() {
+                @Override
+                public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
+                    BillDetails billDetails = response.body();
+                    if (billDetails != null)
+                        updateBillDetails(billDetails, listProduct.get(listProduct.size() - 1).getIdProduct());
+
+
+                }
+
+                @Override
+                public void onFailure(Call<BillDetails> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    private void updateBillDetails(BillDetails billDetails, int idProduct) {
+        billDetails.setStatus(2);
+        APIService.appService.putBillDetails(billDetails).enqueue(new Callback<BillDetails>() {
+            @Override
+            public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
+                NotificationDiaLog.dismissProgressBar();
+                Log.e("billDetails", "true");
+                if (billDetails.getIdProduct() == idProduct) {
+                    NotificationDiaLog.showDiaLogValidDate("Mua hàng thành công!" , BuyDetailsActivity.this);
+                    startActivity(new Intent(BuyDetailsActivity.this, MyBillsActivity.class));
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BillDetails> call, Throwable t) {
+                NotificationDiaLog.dismissProgressBar();
+                NotificationDiaLog.showDiaLogValidDate("Mua thất bại!", BuyDetailsActivity.this);
+            }
+        });
+    }
+
+
+
+
+
+    private void callBillInCart() {
+        APIService.appService.callBillInCart(0, LoginActivity.userCurrent.getUser())
+                .enqueue(new Callback<List<Bill>>() {
+                    @Override
+                    public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
+                        try {
+                            billInCart = response.body().get(0);
+                            Log.e("hoho", billInCart.getIdBill() + "");
+
+                        } catch (Exception e) {
+                            billInCart = null;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Bill>> call, Throwable t) {
+                        NotificationDiaLog.dismissProgressBar();
+                        Log.e(thisActivity.toString(), t.toString());
+
+                    }
+                });
     }
 
     private void createBillBuyNow() {
@@ -159,8 +250,24 @@ public class BuyDetailsActivity extends AppCompatActivity {
     private void setBill() {
 
         if (status == 0) {
+            listProduct = (List<Product>) getIntent().getSerializableExtra("listProduct");
+            double sale = 0;
+            double total = 0;
+            double totalBill = 0;
+            for (Product p : listProduct) {
+                double percent = (double) p.getSale() / 100;
+                sale += (double) p.getPrice() * percent;
+                total += p.getPrice();
+                totalBill += (double) p.getPrice() * (1 - percent);
+            }
+            priceSale = sale;
+            priceTotal = total;
+            priceTotalBill = totalBill;
+
+
 
         } else {
+            productCurrent = (Product) getIntent().getSerializableExtra("product");
             listProduct = new ArrayList<>();
             listProduct.add(productCurrent);
             double percent = (double) productCurrent.getSale() / 100;

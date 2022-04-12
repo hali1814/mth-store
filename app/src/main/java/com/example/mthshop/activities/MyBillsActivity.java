@@ -27,6 +27,10 @@ public class MyBillsActivity extends AppCompatActivity {
         ////status bar
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+        //sett listener
+        thisActivity.aMyBillsBtnBack.setOnClickListener( view -> { finish(); });
+
+
         //set mau tablayout
         thisActivity.aMyBillsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#1C1B1B"));
         thisActivity.aMyBillsTabLayout.setTabTextColors(Color.parseColor("#B8B1B1"), Color.parseColor("#1C1B1B"));

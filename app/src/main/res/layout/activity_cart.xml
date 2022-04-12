@@ -124,6 +124,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:text="Mua hàng"
+            android:enabled="true"
             android:background="@color/main"/>
 
     </LinearLayout>

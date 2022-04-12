@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,8 +18,10 @@ import com.example.mthshop.databinding.ActivityCartBinding;
 import com.example.mthshop.dialog.NotificationDiaLog;
 import com.example.mthshop.fortmat.FortMartData;
 import com.example.mthshop.model.Bill;
+import com.example.mthshop.model.BillDetails;
 import com.example.mthshop.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,11 +50,88 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
+        listProduct = new ArrayList<>();
         NotificationDiaLog.showProgressBar(this);
         callBillInCart();
 
+        //mua heest gio hang
+        thisActivity.aCartBtnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("size", listProduct.size() + "");
+                if (listProduct.size() == 0) {
+                    NotificationDiaLog.showDiaLogValidDate("Giỏ hàng đang rỗng mỡi thêm sản phẩm!", CartActivity.this);
+                }else {
+                    Intent intent = new Intent(CartActivity.this, BuyDetailsActivity.class);
+                    intent.putExtra("buyNow", 0);
+                    intent.putExtra("listProduct", (ArrayList)listProduct);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        });
 
     }
+
+//    private void buyNow() { //bill status 1 -> 3
+//        billInCart.setStatus(3);
+//
+//        APIService.appService.putBill(billInCart).enqueue(new Callback<Bill>() {
+//            @Override
+//            public void onResponse(Call<Bill> call, Response<Bill> response) {
+//                callBillDetails();
+//                Log.e("billInCart", "true");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Bill> call, Throwable t) {
+//                NotificationDiaLog.dismissProgressBar();
+//                Log.e("billInCart", "false");
+//            }
+//        });
+//    }
+
+//    private void callBillDetails() { //status 0 -> 2 trang thai cho xac nhan
+//        for (Product p: listProduct) {
+//            APIService.appService.findBillDetails(billInCart.getIdBill(), p.getIdProduct()).enqueue(new Callback<BillDetails>() {
+//                @Override
+//                public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
+//                    BillDetails billDetails = response.body();
+//                    if (billDetails != null)
+//                        updateBillDetails(billDetails);
+//                }
+//
+//                @Override
+//                public void onFailure(Call<BillDetails> call, Throwable t) {
+//
+//                }
+//            });
+//        }
+//    }
+
+//    private void updateBillDetails(BillDetails billDetails) {
+//        billDetails.setStatus(2);
+//        APIService.appService.putBillDetails(billDetails).enqueue(new Callback<BillDetails>() {
+//            @Override
+//            public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
+//                listProduct.clear();
+//                setAdapterRecycleView(false);
+//                NotificationDiaLog.dismissProgressBar();
+//                NotificationDiaLog.showDiaLogValidDate("Mua thành công!", CartActivity.this);
+//                Log.e("billDetails", "true");
+//                startActivity(new Intent(CartActivity.this, MyBillsActivity.class));
+//                finish();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BillDetails> call, Throwable t) {
+//                NotificationDiaLog.dismissProgressBar();
+//                NotificationDiaLog.showDiaLogValidDate("Mua thất bại!", CartActivity.this);
+//            }
+//        });
+//    }
+
 
     private void callBillInCart() {
         APIService.appService.callBillInCart(0, LoginActivity.userCurrent.getUser())
@@ -145,13 +225,15 @@ public class CartActivity extends AppCompatActivity {
             double priceSale = (double) p.getPrice() * (1 - sale);
             total += priceSale;
         }
-        if (total == 0) {
+        if (total == 0 || listProduct.size() == 0) {
             thisActivity.aCartTvEmpty.setVisibility(View.VISIBLE);
             thisActivity.aCartChkSelectAll.setChecked(false);
             checkStatusDelete(0);
         }
+        billInCart.setTotal(total);
         thisActivity.aCartTvTotalPay.setText("Tổng thanh toán \u20AB" + FortMartData.fortMartTypeDoubleToMoney(total));
     }
+
 
 
     public void checkStatusDelete(int i) {
