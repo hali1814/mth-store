@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.mthshop.R;
+import com.example.mthshop.activities.ChangePasswordActivity;
 import com.example.mthshop.activities.DetailsMeActivity;
 import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.activities.MyBillsActivity;
@@ -57,7 +58,12 @@ public class MeFragment extends Fragment {
             }
         });
 
-
+        thisFragment.fMeEdChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+            }
+        });
 
         return thisFragment.getRoot();
     }
