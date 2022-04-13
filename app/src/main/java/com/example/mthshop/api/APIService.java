@@ -83,6 +83,12 @@ public interface APIService {
     @GET("api/products")
     Call<List<Product>> callAllProducts();
 
+    @POST("api/product/post")
+    Call<Product> postProduct(@Body Product product);
+
+    @POST("api/product/put")
+    Call<Product> putProduct(@Body Product product);
+
     @GET("api/products/users/{owner}")
     Call<List<Product>> callMyProduct(@Path("owner") String owner);
 

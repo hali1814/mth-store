@@ -105,9 +105,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void removeSoldOutProduct(List<Product> listProduct) {
-        for (int i = 0; i < listProduct.size(); i++) {
-            if (listProduct.get(i).getState().equals("Hết hàng")) {
-                listProduct.remove(i);
+        List<Product> tmp = new ArrayList<>(listProduct);
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i).getState().equalsIgnoreCase("Hết hàng")) {
+                listProduct.remove(tmp.get(i));
             }
         }
     }

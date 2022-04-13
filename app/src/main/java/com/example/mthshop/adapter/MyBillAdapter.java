@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mthshop.R;
 import com.example.mthshop.activities.DetailsProductActivity;
+import com.example.mthshop.activities.EditMyProductActivity;
 import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.dialog.NotificationDiaLog;
@@ -23,6 +24,7 @@ import com.example.mthshop.fortmat.FortMartData;
 import com.example.mthshop.model.BillDetails;
 import com.example.mthshop.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,6 +72,7 @@ public class MyBillAdapter extends RecyclerView.Adapter<MyBillAdapter.ViewHolder
         }else if (status == 6) {
             myProduct(holder, position);
         }
+
     }
 
     private void myProduct(ViewHolder holder, int position) {
@@ -78,7 +81,7 @@ public class MyBillAdapter extends RecyclerView.Adapter<MyBillAdapter.ViewHolder
         holder.btnResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, DetailsProductActivity.class); // qua chinh sua product
+                Intent intent = new Intent(activity, EditMyProductActivity.class); // qua chinh sua product
                 intent.putExtra("product" ,listProduct.get(position));
                 activity.startActivity(intent);
             }
@@ -88,6 +91,38 @@ public class MyBillAdapter extends RecyclerView.Adapter<MyBillAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 // xoa san pham cua minh
+                NotificationDiaLog.showProgressBar(activity);
+                Product tmp = listProduct.get(position);
+                tmp.setState("Hết hàng");
+                putProduct(tmp);
+
+
+            }
+        });
+    }
+
+    private void removeSoldOutProduct(List<Product> listProduct) {
+        List<Product> tmp = new ArrayList<>(listProduct);
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i).getState().equalsIgnoreCase("Hết hàng")) {
+                listProduct.remove(tmp.get(i));
+            }
+        }
+    }
+
+    private void putProduct(Product product) {
+        APIService.appService.putProduct(product).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                NotificationDiaLog.dismissProgressBar();
+                removeSoldOutProduct(listProduct);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                NotificationDiaLog.dismissProgressBar();
+                Log.e("xoa hang", "false");
             }
         });
     }

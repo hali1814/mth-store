@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
     private int idProduct;
-
     @SerializedName("NameProduct")
     private String nameProduct;
     @SerializedName("WhereProduction")
@@ -28,13 +27,13 @@ public class Product implements Serializable {
     @SerializedName("Sale")
     private int sale;
     @SerializedName("Price")
-    private double price;
+    private int price;
     @SerializedName("Images")
     private String images;
 
     public int inBill;
 
-    public Product(int idProduct, String nameProduct, String whereProduction, String state, String warranty, String batteryCapacity, String description, String nameColor, String owner, int idType, int sale, double price, String images) {
+    public Product(int idProduct, String nameProduct, String whereProduction, String state, String warranty, String batteryCapacity, String description, String nameColor, String owner, int idType, int sale, int price, String images) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.whereProduction = whereProduction;
@@ -141,11 +140,11 @@ public class Product implements Serializable {
         this.sale = sale;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

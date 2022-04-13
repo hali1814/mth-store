@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/arial_extra_bold"
-            android:text="Chỉnh sữa sản phẩm"
+            android:text="Thêm sản phẩm"
             android:layout_marginLeft="10dp"
             android:textColor="@color/main_text"
             android:textSize="15sp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
     <ImageView
-        android:id="@+id/aEditProduct_imgProduct"
+        android:id="@+id/aAddProduct_imgProduct"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
@@ -66,13 +66,13 @@
 
 
     <EditText
-        android:id="@+id/aEditProduct_edNameProduct"
+        android:id="@+id/aAddProduct_edNameProduct"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tên sản phẩm"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -87,13 +87,13 @@
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edWhereProduction"
+        android:id="@+id/aAddProduct_edWhereProduction"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập nơi sản xuất"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -103,18 +103,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edNameProduct"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edNameProduct"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edStage"
+        android:id="@+id/aAddProduct_edStage"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tình trạng sản phẩm"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -124,18 +124,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edWhereProduction"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edWhereProduction"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edWarranty"
+        android:id="@+id/aAddProduct_edWarranty"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập thời gian bảo hành"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -145,18 +145,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edStage"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edStage"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edBatteryCapacity"
+        android:id="@+id/aAddProduct_edBatteryCapacity"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập dung lượng pin"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -166,18 +166,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edWarranty"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edWarranty"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edNameColor"
+        android:id="@+id/aAddProduct_edNameColor"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tên màu sắc"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -187,20 +187,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edBatteryCapacity"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edBatteryCapacity"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edSale"
+        android:id="@+id/aAddProduct_edSale"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
-        android:maxLength="20"
+        android:hint="Nhập khuyếtn mãi"
+        android:maxLength="2"
         android:paddingStart="10dp"
+        android:inputType="number"
         android:textColor="@color/main_text"
         android:textColorHint="@color/hint"
         android:textCursorDrawable="@drawable/cursor_style"
@@ -208,19 +209,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edNameColor"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edNameColor"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
-        android:id="@+id/aEditProduct_edPrice"
+        android:id="@+id/aAddProduct_edPrice"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập giá"
         android:maxLength="20"
+        android:inputType="number"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
         android:textColorHint="@color/hint"
@@ -229,27 +231,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edSale"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edSale"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/aAddProduct_tiLNameBook"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:hint="Chọn loại sản phẩm"
+        android:textColorHint="@color/second_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_edPrice"
+        app:layout_constraintVertical_bias=".08"
+        app:layout_constraintWidth_percent=".9">
+
+        <AutoCompleteTextView
+            android:id="@+id/aAddProduct_autoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:padding="0dp"
+            android:focusable="false"
+            android:inputType="phone"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/aEditProduct_btnEdit"
+        android:id="@+id/aAddProduct_btnAdd"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/btn_style_login"
         android:fontFamily="@font/arial_regular"
-        android:text="Chỉnh sữa"
+        android:text="Thêm"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintWidth_percent=".9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edPrice"
-        app:layout_constraintVertical_bias=".1" />
+        app:layout_constraintTop_toBottomOf="@+id/aAddProduct_tiLNameBook"
+
+        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintWidth_percent=".9" />
 
 
 

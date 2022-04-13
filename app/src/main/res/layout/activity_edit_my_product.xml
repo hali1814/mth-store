@@ -70,9 +70,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tên sản phẩm"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -91,9 +90,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập nơi sản xuất"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -104,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edNameProduct"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -112,9 +110,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tình trạng sản phẩm"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -125,7 +122,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edWhereProduction"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -133,9 +130,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
+        android:hint="Nhập thời gian bảo hành"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -146,7 +142,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edStage"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -154,9 +150,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập dung lượng pin"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -167,7 +162,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edWarranty"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -175,9 +170,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập tên màu sắc"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -188,7 +182,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edBatteryCapacity"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -196,10 +190,10 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
-        android:maxLength="20"
+        android:hint="Nhập khuyếtn mãi"
+        android:maxLength="2"
+        android:inputType="number"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
         android:textColorHint="@color/hint"
@@ -209,7 +203,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edNameColor"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
 
     <EditText
@@ -217,9 +211,8 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@drawable/form_style_login"
-        android:drawableStart="@drawable/ic_login_user"
         android:drawablePadding="10dp"
-        android:hint="Nhập tên đăng nhập"
+        android:hint="Nhập giá"
         android:maxLength="20"
         android:paddingStart="10dp"
         android:textColor="@color/main_text"
@@ -230,8 +223,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edSale"
-        app:layout_constraintVertical_bias=".02"
+        app:layout_constraintVertical_bias=".01"
         app:layout_constraintWidth_percent=".9" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/appCompatSpinner"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        app:layout_constraintEnd_toEndOf="@+id/aEditProduct_edPrice"
+        app:layout_constraintStart_toStartOf="@+id/aEditProduct_edPrice"
+        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edPrice" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -244,12 +245,13 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintWidth_percent=".9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aEditProduct_edPrice"
-        app:layout_constraintVertical_bias=".1" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatSpinner"
+
+        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintWidth_percent=".9" />
 
 
 
