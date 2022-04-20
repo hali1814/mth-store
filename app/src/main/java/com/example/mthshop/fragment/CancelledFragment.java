@@ -38,8 +38,16 @@ public class CancelledFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         thisFragment = FragmentCancelledBinding.inflate(getLayoutInflater());
         listProduct = new ArrayList<>();
-        callBills();
+
         return thisFragment.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listProduct.clear();
+        setRecyclerView();
+        callBills();
     }
 
     private void callBills() {
@@ -84,7 +92,9 @@ public class CancelledFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        thisFragment.fCancelledTvEmpty.setVisibility(View.GONE);
+        if (!listProduct.isEmpty())
+            thisFragment.fCancelledTvEmpty.setVisibility(View.GONE);
+
         myBillAdapter = new MyBillAdapter(listProduct, getActivity(), 5);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         thisFragment.fCancelledRecyclerView.setHasFixedSize(true);

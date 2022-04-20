@@ -69,6 +69,9 @@ public interface APIService {
     @GET("api/bill-details/find-bill/{idBill}/{idProduct}")
     Call<BillDetails> findBillDetails(@Path("idBill") int idBill, @Path("idProduct") int idProduct);
 
+    @GET("api/bill-details/confirm-bill/{user}")
+    Call<List<BillDetails>> callBillDetailsByOwner(@Path("user") String user);
+
     @POST("api/bill-details/put")
     Call<BillDetails> putBillDetails(@Body BillDetails billDetails);
 

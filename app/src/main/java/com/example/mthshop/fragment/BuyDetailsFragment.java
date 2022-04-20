@@ -35,8 +35,6 @@ public class BuyDetailsFragment extends Fragment {
         status = ((BuyDetailsActivity)getActivity()).getStatus();
         productCurrent = ((BuyDetailsActivity)getActivity()).getProductCurrent();
         listProduct = ((BuyDetailsActivity)getActivity()).getListProduct();
-
-
         //
         pushData();
         setRecyclerViewProduct();
@@ -56,6 +54,7 @@ public class BuyDetailsFragment extends Fragment {
     }
 
     private void setRecyclerViewProduct() {
+
         oderAdapter = new OderAdapter(listProduct, getActivity());
         if (listProduct != null) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

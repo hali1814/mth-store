@@ -42,9 +42,10 @@ public class NotificationDiaLog {
     public static void showProgressBar(Context context) {
         if (dialog == null) {
             dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.progress_bar);
         }
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.progress_bar);
+
 
         Window window = dialog.getWindow();
         if (window == null)

@@ -36,8 +36,15 @@ public class DeliveringFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         thisFragment = FragmentDeliveringBinding.inflate(getLayoutInflater());
-        callBills();
         return thisFragment.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listProduct = new ArrayList<>();
+        setRecyclerView();
+        callBills();
     }
 
     private void callBills() {
@@ -46,7 +53,6 @@ public class DeliveringFragment extends Fragment {
             public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
                 listMyBill = response.body();
                 callListProductInBill();
-                listProduct = new ArrayList<>();
                 Log.e("listMyBill", listMyBill.get(0).toString());
             }
 
@@ -76,14 +82,16 @@ public class DeliveringFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<Product>> call, Throwable t) {
-
+                    NotificationDiaLog.dismissProgressBar();
                 }
             });
         }
     }
 
     private void setRecyclerView() {
-        thisFragment.fDeliveringTvEmpty.setVisibility(View.GONE);
+        if (!listProduct.isEmpty())
+            thisFragment.fDeliveringTvEmpty.setVisibility(View.GONE);
+
         myBillAdapter = new MyBillAdapter(listProduct, getActivity(), 4);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         thisFragment.fDeliveringRecyclerView.setHasFixedSize(true);

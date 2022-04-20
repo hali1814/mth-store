@@ -8,6 +8,7 @@ public class BillDetails {
     private int idProduct;
     @SerializedName("Status")
     private int status;
+    private Product product;
 
 
     public BillDetails(int idBillDetails, int idBill, int idProduct, int status) {
@@ -18,6 +19,14 @@ public class BillDetails {
     }
 
     public BillDetails() {
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getStatus() {
@@ -58,6 +67,7 @@ public class BillDetails {
                 "idBillDetails=" + idBillDetails +
                 ", idBill=" + idBill +
                 ", idProduct=" + idProduct +
+                ", status=" + status +
                 '}';
     }
 }

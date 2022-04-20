@@ -17,6 +17,7 @@ import com.example.mthshop.activities.DetailsMeActivity;
 import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.activities.MyBillsActivity;
 import com.example.mthshop.activities.MyProductActivity;
+import com.example.mthshop.activities.VerifyBillsActivity;
 import com.example.mthshop.databinding.FragmentMeBinding;
 import com.example.mthshop.dialog.NotificationDiaLog;
 
@@ -54,6 +55,13 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MyProductActivity.class));
+            }
+        });
+
+        thisFragment.fMeEdVerifyBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), VerifyBillsActivity.class));
             }
         });
 

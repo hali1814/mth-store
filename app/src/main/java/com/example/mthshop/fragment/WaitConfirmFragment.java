@@ -39,10 +39,16 @@ public class WaitConfirmFragment extends Fragment {
         thisFragment = FragmentWaitConfirmBinding.inflate(getLayoutInflater());
         NotificationDiaLog.showProgressBar(getActivity());
         listProduct = new ArrayList<>();
-        callBills();
         return thisFragment.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        listProduct.clear();
+        setRecyclerView();
+        callBills();
+    }
 
     private void callBills() {
         APIService.appService.callBillInCart(3, LoginActivity.userCurrent.getUser()).enqueue(new Callback<List<Bill>>() {
@@ -86,7 +92,9 @@ public class WaitConfirmFragment extends Fragment {
         }
     }
     private void setRecyclerView() {
-        thisFragment.fWaitConfirmTvEmpty.setVisibility(View.GONE);
+        if (!listProduct.isEmpty())
+            thisFragment.fWaitConfirmTvEmpty.setVisibility(View.GONE);
+
         myBillAdapter = new MyBillAdapter(listProduct, getActivity(), 2);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         thisFragment.fWaitConfirmRecyclerView.setHasFixedSize(true);

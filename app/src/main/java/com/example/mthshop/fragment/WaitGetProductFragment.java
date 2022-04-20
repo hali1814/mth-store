@@ -35,11 +35,17 @@ public class WaitGetProductFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         thisFragment = FragmentWaitGetProductBinding.inflate(getLayoutInflater());
-        callBills();
         listProduct = new ArrayList<>();
         return thisFragment.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        listProduct.clear();
+        setRecyclerView();
+        callBills();
+    }
 
     private void callBills() {
         APIService.appService.callBillInCart(3, LoginActivity.userCurrent.getUser()).enqueue(new Callback<List<Bill>>() {
@@ -77,14 +83,16 @@ public class WaitGetProductFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<Product>> call, Throwable t) {
-
+                    NotificationDiaLog.dismissProgressBar();
                 }
             });
         }
     }
 
     private void setRecyclerView() {
-        thisFragment.fWaitGEtProductTvEmpty.setVisibility(View.GONE);
+        if (!listProduct.isEmpty())
+            thisFragment.fWaitGEtProductTvEmpty.setVisibility(View.GONE);
+
         myBillAdapter = new MyBillAdapter(listProduct, getActivity(), 3);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         thisFragment.fWaitGetProductRecyclerView.setHasFixedSize(true);
