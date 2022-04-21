@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MTHShop"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.InputRateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.VerifyBillsActivity"
             android:exported="false" />
         <activity

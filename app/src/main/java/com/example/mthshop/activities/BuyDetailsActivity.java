@@ -12,6 +12,7 @@ import com.example.mthshop.adapter.CartAdapter;
 import com.example.mthshop.adapter.OderAdapter;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.databinding.ActivityBuyDetailsBinding;
+import com.example.mthshop.datalocal.SQLite;
 import com.example.mthshop.dialog.NotificationDiaLog;
 import com.example.mthshop.fortmat.FortMartData;
 import com.example.mthshop.fragment.BuyDetailsFragment;
@@ -82,8 +83,9 @@ public class BuyDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void buyInCart() { //bill status 1 -> 3
+    private void buyInCart() { //bill status 0 -> 3
         billInCart.setStatus(3);
+        billInCart.setDate(FortMartData.getDateCurrent());
         billInCart.setTotal(priceTotalBill);
         APIService.appService.putBill(billInCart).enqueue(new Callback<Bill>() {
             @Override
@@ -106,8 +108,10 @@ public class BuyDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
                     BillDetails billDetails = response.body();
-                    if (billDetails != null)
-                        updateBillDetails(billDetails, listProduct.get(listProduct.size() - 1).getIdProduct());
+                    if (billDetails != null) {
+                        updateBillDetails(billDetails, listProduct.get(listProduct.size() - 1).getIdProduct()); // lấy product cuối cùng trong líst thực hiện đúng 1 lần intent
+                        SQLite.addNotification(BuyDetailsActivity.this,"Bạn đặt thành công đơn hàng " + p.inBill  + " .Sản phẩm: " + p.getNameProduct() + " .Vào ngày " + billInCart.getDateNotification());
+                    }
 
 
                 }
@@ -207,8 +211,8 @@ public class BuyDetailsActivity extends AppCompatActivity {
     }
 
     private void createBillDetails() { // thêm các sản phẩm vào bill detais
-        for(Product product : listProduct) {
-            BillDetails billDetails = new BillDetails(0, billCurrent.getIdBill(), product.getIdProduct(), 2);
+        for(Product p : listProduct) {
+            BillDetails billDetails = new BillDetails(0, billCurrent.getIdBill(), p.getIdProduct(), 2);
             APIService.appService.postBillDetails(billDetails).enqueue(new Callback<BillDetails>() {
                 @Override
                 public void onResponse(Call<BillDetails> call, Response<BillDetails> response) {
@@ -219,6 +223,7 @@ public class BuyDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<BillDetails> call, Throwable t) {
                     changeStatusBill(); // chỉnh trạng thái mua ngay thành chờ đợi 2 -> 3
+                    SQLite.addNotification(BuyDetailsActivity.this,"Bạn đặt thành công đơn hàng " + billCurrent.getIdBill()  + " .Sản phẩm: " + p.getNameProduct() + " .Vào ngày " + billCurrent.getDate());
                 }
             });
         }
@@ -234,6 +239,7 @@ public class BuyDetailsActivity extends AppCompatActivity {
                 Log.e("put", "thanh cong");
                 NotificationDiaLog.dismissProgressBar();
                 NotificationDiaLog.showDiaLogValidDate("Mua thành công!", BuyDetailsActivity.this);
+
                 Intent intent = new Intent(BuyDetailsActivity.this, MyBillsActivity.class);
                 startActivity(intent);
 

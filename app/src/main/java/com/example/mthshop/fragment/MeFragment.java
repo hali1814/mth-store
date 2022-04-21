@@ -17,6 +17,7 @@ import com.example.mthshop.activities.DetailsMeActivity;
 import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.activities.MyBillsActivity;
 import com.example.mthshop.activities.MyProductActivity;
+import com.example.mthshop.activities.RateActivity;
 import com.example.mthshop.activities.VerifyBillsActivity;
 import com.example.mthshop.databinding.FragmentMeBinding;
 import com.example.mthshop.dialog.NotificationDiaLog;
@@ -104,7 +105,8 @@ public class MeFragment extends Fragment {
         thisFragment.fMeLnRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), RateActivity.class);
+                startActivity(intent);
             }
         });
     }

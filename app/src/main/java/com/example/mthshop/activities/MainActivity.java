@@ -17,6 +17,7 @@ import com.example.mthshop.R;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.fragment.HomeFragment;
 import com.example.mthshop.fragment.MeFragment;
+import com.example.mthshop.fragment.NotificationFragment;
 import com.example.mthshop.model.Bill;
 import com.example.mthshop.model.BillDetails;
 import com.example.mthshop.model.Rate;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         menu.getItem(1).setIcon(R.drawable.ic_chat_second);
                         menu.getItem(2).setIcon(R.drawable.ic_bell_main);
                         menu.getItem(3).setIcon(R.drawable.ic_me_second);
+                        fragment = new NotificationFragment();
                         break;
                     case R.id.mBN_me:
                         menu.getItem(0).setIcon(R.drawable.ic_home_second);

@@ -18,8 +18,10 @@ import com.example.mthshop.activities.DetailsProductActivity;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.dialog.NotificationDiaLog;
 import com.example.mthshop.fortmat.FortMartData;
+import com.example.mthshop.model.Bill;
 import com.example.mthshop.model.BillDetails;
 import com.example.mthshop.model.Product;
+import com.example.mthshop.model.Rate;
 
 import java.util.List;
 
@@ -94,8 +96,43 @@ public class VerifyBillsAdapter extends RecyclerView.Adapter<VerifyBillsAdapter.
             public void onClick(View view) {
                 NotificationDiaLog.showProgressBar(activity);
                 findBillDetails(position, status);
+                callBill(listProduct.get(position));
                 listProduct.remove(position);
                 notifyDataSetChanged();
+
+            }
+        });
+    }
+
+    private void callBill(Product product) {
+        APIService.appService.callBill(product.inBill).enqueue(new Callback<Bill>() {
+            @Override
+            public void onResponse(Call<Bill> call, Response<Bill> response) {
+                Bill bill = response.body();
+                if (bill != null) {
+                    Rate rate = new Rate(0, "", "", 0, 0, bill.getOwner(), product.getIdProduct());
+                    Log.e("calBill in rate", bill.toString());
+                    addRate(rate);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Bill> call, Throwable t) {
+                Log.e("calBill in rate", t.toString());
+            }
+        });
+    }
+
+    private void addRate(Rate rate){
+        APIService.appService.addRate(rate).enqueue(new Callback<Rate>() {
+            @Override
+            public void onResponse(Call<Rate> call, Response<Rate> response) {
+                Log.e("addRate in rate", rate.toString());
+            }
+
+            @Override
+            public void onFailure(Call<Rate> call, Throwable t) {
+                Log.e("addRate in rate", t.toString());
             }
         });
     }
@@ -114,6 +151,9 @@ public class VerifyBillsAdapter extends RecyclerView.Adapter<VerifyBillsAdapter.
             }
         });
     }
+
+    //tao rate khi don hang da giao
+
 
     //cho xac nhan
     private void stateWaitConfirmation(ViewHolder holder, int position, int status) {

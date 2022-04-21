@@ -26,6 +26,7 @@ import com.example.mthshop.model.Product;
 import com.example.mthshop.model.Rate;
 import com.example.mthshop.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -102,7 +103,16 @@ public class DetailsProductFragment extends Fragment {
         APIService.appService.callRatesByIdProduct(productCurrent.getIdProduct()).enqueue(new Callback<List<Rate>>() {
             @Override
             public void onResponse(Call<List<Rate>> call, Response<List<Rate>> response) {
-                listRate = response.body();
+                List<Rate> tmp = response.body();
+                if (tmp != null) {
+                    listRate = new ArrayList<>();
+                    for (Rate rate :
+                            tmp) {
+                        if (rate.getStatus() == 1) {
+                            listRate.add(rate);
+                        }
+                    }
+                }
                 getBillDetailsByIdProduct();
                 Log.e("fsadf", "fasdfasdfsa");
             }

@@ -24,7 +24,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
-    public static String baseUrl = "http://nth.congtydacap.club/";
+    public String baseUrl = "http://nth.congtydacap.club/";
 
     APIService appService = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build().create(APIService.class);
 
@@ -49,6 +49,9 @@ public interface APIService {
 
     @GET("api/bills/status/{status}/{user}")
     Call<List<Bill>> callBillInCart(@Path("status") int status, @Path("user") String user);
+
+    @GET("api/bill/{bill}")
+    Call<Bill> callBill(@Path("bill") int idBill);
 
     @POST("api/bill/post")
     Call<Bill> postBillCart(@Body Bill bill);
@@ -86,6 +89,9 @@ public interface APIService {
     @GET("api/products")
     Call<List<Product>> callAllProducts();
 
+    @GET("api/product/{product}")
+    Call<Product> callProductById(@Path("product") int product);
+
     @POST("api/product/post")
     Call<Product> postProduct(@Body Product product);
 
@@ -109,6 +115,12 @@ public interface APIService {
 
     @GET("api/rates/products/{idProduct}")
     Call<List<Rate>> callRatesByIdProduct(@Path("idProduct") int idProduct);
+
+    @POST("api/rate/post")
+    Call<Rate> addRate(@Body Rate rate);
+
+    @POST("api/rate/put")
+    Call<Rate> editRate(@Body Rate rate);
 
 
 

@@ -55,7 +55,9 @@ public class Bill {
     public void setDate(String date) {
         this.date = date;
     }
-
+    public String getDateNotification() {
+        return formatDateTypeNotification(date);
+    }
     public double getStatus() {
         return status;
     }
@@ -81,6 +83,19 @@ public class Bill {
                 ", status=" + status +
                 ", owner=" + owner +
                 '}';
+    }
+
+    private String formatDateTypeNotification(String date) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date tmp = inputFormat.parse(date);
+            String formattedDate = outputFormat.format(tmp);
+            return formattedDate;
+        }catch (Exception ex) {
+            Log.e("date", "Sai dinh dang");
+        }
+        return "";
     }
 
     private void formatDate(String date) {
