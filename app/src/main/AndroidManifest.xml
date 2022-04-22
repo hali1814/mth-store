@@ -63,6 +63,9 @@
             android:name=".activities.CartActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.Edit_Personal_Information"
+            android:exported="false" />
+        <activity
             android:name=".activities.ForgotPassword"
             android:exported="false" />
         <activity
