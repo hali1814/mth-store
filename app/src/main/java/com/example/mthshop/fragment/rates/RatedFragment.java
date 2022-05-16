@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.mthshop.activities.LoginActivity;
 import com.example.mthshop.adapter.RateDetailsAdapter;
 import com.example.mthshop.api.APIService;
 import com.example.mthshop.databinding.FragmentDoNotRateBinding;
@@ -56,7 +57,7 @@ public class RatedFragment extends Fragment {
                 if (tmp != null) {
                     for (Rate rate :
                             tmp) {
-                        if (rate.getStatus() == 1)
+                        if (rate.getStatus() == 1 && rate.getOwner().equals(LoginActivity.userCurrent.getUser()))
                             listRate.add(rate);
                     }
                     callProductInRate();
