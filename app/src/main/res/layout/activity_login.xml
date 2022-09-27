@@ -178,6 +178,7 @@
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintVertical_bias=".1"
         app:layout_constraintEnd_toEndOf="@+id/aLogin_btnLogin"
         app:layout_constraintStart_toStartOf="@+id/aLogin_btnLogin"
@@ -186,7 +187,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:src="@drawable/ic_login_gg"/>
 
         <TextView
